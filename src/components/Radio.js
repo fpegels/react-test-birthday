@@ -19,11 +19,11 @@ class Radio extends Component {
 		return (
   <div className='radioButtons'>
     <div className='left'>
-      <input type='radio' name="name" onChange={(e) => this.onChange(e.target.name)}/>
+      <input type='radio' name="orderby" onChange={(e) => this.onChange("name")}/>
       <label>&nbsp;&nbsp;Sort by name</label>
     </div>
     <div className='right'>
-      <input type='radio' name="age" onChange={(e) => this.onChange(e.target.name)}/>
+      <input type='radio' name="orderby" onChange={(e) => this.onChange("age")}/>
       <label>&nbsp;&nbsp;Sort by age</label>
     </div>
   </div>
