@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 
 class Table extends Component {
-	constructor() {
-        super()
+	constructor(props) {
+        super(props)
 		this.people = [
 			{
 				name: "John Sina",
@@ -31,16 +31,29 @@ class Table extends Component {
 				birth: "10/31/1999"
 			}
 		];
+		// this.compareDates = this.compareDates.bind(this)
+		// this.compareNames = this.compareNames.bind(this)
 	}
 	compareDates(person1, person2) {
 		// complete this date comparator which enables sort by age
+		if (new Date(person1.birth)<new Date(person2.birth)) return -1
+		return 1
 	}
 
 	compareNames(person1, person2) {
 		// complete this string comparator with enables sort by name
+		if (person1.name<person2.name) return -1
+		return 1
 	}
 
+
 	render() {
+		{
+			if (this.props.sortParameter === 'name') {
+				this.people.sort((a,b) => this.compareNames(a,b))}
+				else { this.people.sort((a,b) => this.compareDates(a,b))}
+			
+		}
 		return (
   <div className='table-div'>
     <table className='table table-striped table-bordered table-hover full-width'>
@@ -51,9 +64,15 @@ class Table extends Component {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td />
-        </tr>
+		  { 
+			this.people.map((X,i) => (
+				<tr key={i}>
+					<td>{X.name}</td>
+		  			<td>{X.birth}</td>
+        		</tr>
+			))
+		  }
+        
       </tbody>
     </table>
   </div>
@@ -63,8 +82,8 @@ class Table extends Component {
 }
 
 // Uncomment the snippet below
-// Table.propTypes = {
-// 	sortParameter: PropTypes.string
-// }
+Table.propTypes = {
+	sortParameter: PropTypes.string
+}
 
 export default Table;
